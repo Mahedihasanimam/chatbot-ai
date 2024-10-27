@@ -6,8 +6,8 @@ const MyButton = ({ text,linktext, type = "primary", size ,icon, onClick, disabl
   return (
   <Link to={`/${linktext}` }>
     <Button 
-   className='my-6'
-    style={{marginRight: '10px',height: '56px',width: '208px',marginTop:"48px",background: 'linear-gradient(to left, #1A50FF, #D96FF8)'}}
+   className='my-6 shadow-2xl shadow-[#d86ff870]'
+    style={{marginRight: '10px',height: '44px',marginTop:"48px",background: 'linear-gradient(to left, #1A50FF, #D96FF8)'}}
       type={type} 
       size={size} 
       onClick={onClick} 

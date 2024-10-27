@@ -19,6 +19,10 @@ export default {
       },
       backgroundImage: {
         "chatbot-bg": "url('/src/assets/images/Step 1.png')",
+        "chatbot-bg2": "url('/src/assets/images/bg2.png)",
+      },
+      letterSpacing: {
+        normal: "4px",
       },
 
     },

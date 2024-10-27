@@ -7,7 +7,7 @@ const Home = () => {
     <div className="bg-[#000000] ">
       <div className="container mx-auto text-white  px-4 min-h-screen">
         <div>
-          <div className=" flex items-center justify-center ">
+          <div className=" flex items-center justify-center  ">
             <Image
               height={"800px"}
               width={"600px"}
@@ -49,7 +49,7 @@ const Home = () => {
                 </svg>
               }
               text="Get Started Now"
-              linktext={"#"}
+              linktext={"personalinfo"}
               type="primary"
               link="/chat"
             />
