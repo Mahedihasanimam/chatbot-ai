@@ -3,10 +3,10 @@ import { Form, Input, Button, Select } from "antd";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import "tailwindcss/tailwind.css";
 
-const MultiStepForm = () => {
+const Lifestyle = () => {
   const navigate = useNavigate(); // Initialize navigate
   const { Option } = Select;
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(4);
 
   // Step Titles
   const stepTitles = [
@@ -187,4 +187,4 @@ const MultiStepForm = () => {
   );
 };
 
-export default MultiStepForm;
+export default Lifestyle;
