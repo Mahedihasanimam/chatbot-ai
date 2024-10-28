@@ -8,8 +8,8 @@ const Allset = () => {
        navigate('/')
     };
   return (
-    <div className="flex items-center  justify-center bg-chatbot-bg h-screen">
-      <div className="text-center ">
+    <div className="flex items-center  justify-center bg-chatbot-bg h-screen ">
+      <div className="text-center p-4">
         <h1 className="text-8xl">🎉</h1>
         <br />
         <span className="bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent text-[24px] font-extrabold pt-4">

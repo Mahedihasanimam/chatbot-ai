@@ -55,8 +55,8 @@ const Personalinformation = () => {
 
   return (
     <div className="flex justify-center items-center bg-chatbot-bg bg-no-repeat bg-center bg-cover min-h-screen text-white">
-      <div className="max-w-5xl w-full mx-auto">
-        <div className="flex border-b-2 border-dotted border-[#34303E]">
+      <div className="lg:max-w-5xl mt-32  w-full mx-auto">
+        <div className="lg:flex flex-row border-b-2 border-dotted border-[#34303E] p-4">
 
           {/* Sidebar for steps */}
           <div className="w-full p-6">
@@ -132,7 +132,7 @@ const Personalinformation = () => {
           </div>
 
           {/* Form Container */}
-          <div className="max-w-sm text-white w-full h-fit p-[24px] bg-gradient-to-l from-[#0F0D15] to-[#1D1929] rounded-3xl border-2 border-[#262136] shadow-lg">
+          <div className="lg:max-w-sm w-full text-white  h-fit p-[24px] bg-gradient-to-l from-[#0F0D15] to-[#1D1929] rounded-3xl border-2 border-[#262136] shadow-lg">
             <h3 className="text-[12px] font-bold text-[#77757F] uppercase tracking-normal mb-4">
               {stepTitles[currentStep - 1]}
             </h3>
