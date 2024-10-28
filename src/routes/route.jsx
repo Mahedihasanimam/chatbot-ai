@@ -8,6 +8,7 @@ import PhysicalDetails from "../pages/physicaldetails/PhysicalDetails";
 import Activitylevel from "../pages/activitylevel/Activitylevel";
 import Lifestyle from "../pages/lifestyle/Lifestyle";
 import Locationincome from "../pages/locationincome/Locationincome";
+import Allset from "../pages/allsetpage/Allset";
   
   const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ import Locationincome from "../pages/locationincome/Locationincome";
         {
           path: "/locationincome",
           element: <Locationincome/>,
+        },
+        {
+          path: "/mainpage",
+          element: <Allset/>,
         },
     ]
     },
