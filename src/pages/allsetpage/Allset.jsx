@@ -1,26 +1,31 @@
 import { Button } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./animation.css"
 
 const Allset = () => {
-    const navigate=useNavigate()
-    const handlenextpage = () => {
-       navigate('/')
-    };
+  const navigate = useNavigate();
+  
+  const handlenextpage = () => {
+    navigate('/');
+  };
+  
   return (
-    <div className="flex items-center  justify-center bg-chatbot-bg h-screen ">
+    <div className="flex items-center justify-center bg-chatbot-bg h-screen">
       <div className="text-center p-4">
         <h1 className="text-8xl">🎉</h1>
         <br />
         <span className="bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent text-[24px] font-extrabold pt-4">
           You’re all set!
         </span>
-        <p className="text-[16px] font-semibold text-[#77757F] mt-[16px]">
-        You’re approximately 10% of the global population and 5% of the USA.
+        <br />
+        <p className="text-[16px] font-semibold text-[#77757F] mt-[16px] typing-effect">
+          You’re approximately top 10% of the global population and 5% of the USA.
         </p>
+        <br />
 
         <Button
-        onClick={handlenextpage}
+          onClick={handlenextpage}
           className="my-6 shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium"
           style={{
             marginRight: "10px",
@@ -32,7 +37,7 @@ const Allset = () => {
         >
           Restart
           <svg
-          className="animate-spin"
+            className="animate-spin"
             width="20"
             height="20"
             viewBox="0 0 20 20"

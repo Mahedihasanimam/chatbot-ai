@@ -11,7 +11,7 @@ const Home = () => {
             <img src={bot} alt="bot" className=" h-[600px] object-cover" />
             
           </div>
-          <div className="text-center max-w-3xl mx-auto ">
+          <div className="text-center max-w-3xl mx-auto  -translate-y-36 ">
           <h1 className="text-[40px]  text-center font-medium pb-[12px]">
             Welcome to Chatbot{" "}
             <span className="bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent">
