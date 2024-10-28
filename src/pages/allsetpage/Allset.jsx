@@ -16,7 +16,7 @@ const Allset = () => {
           You’re all set!
         </span>
         <p className="text-[16px] font-semibold text-[#77757F] mt-[16px]">
-          You’re approximately 10% of the global population and 5% of the USA.
+        You’re approximately 10% of the global population and 5% of the USA.
         </p>
 
         <Button
@@ -30,7 +30,7 @@ const Allset = () => {
           }}
           type="primary"
         >
-          Next Step
+          Restart
           <svg
           className="animate-spin"
             width="20"

@@ -10,7 +10,7 @@ const Navbar = () => {
         <h1 className="text-4xl font-bold">
            <Link to="/">
            
-           <Image height={40} preview={false} src={logo} alt="logo"  />
+           <Image height={30} preview={false} src={logo} alt="logo"  />
            </Link>
         </h1>
       </div>
