@@ -35,7 +35,7 @@ const Allset = () => {
           }}
           type="primary"
         >
-          Restart
+           Restart
           <svg
             className="animate-spin"
             width="20"
