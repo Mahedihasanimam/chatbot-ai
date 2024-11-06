@@ -15,11 +15,14 @@ export default {
         info: "#17a2b8",
       },
       fontFamily: {
-        sans: ["Lato", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
       },
       backgroundImage: {
-        "chatbot-bg": "url('/src/assets/images/Step 1.png')",
+        "chatbot-bg": "url('/src/assets/images/25.png')",
+        "mobile-bg-home": "url('/src/assets/images/mobilebghome.png')",
+        "mobile-bg-content": "url('/src/assets/images/mobilebgcontent.png')",
         "chatbot-bg2": "url('/src/assets/images/bg2.png)",
+        "steps-bg": "url('/src/assets/images/steps.png')",
       },
       letterSpacing: {
         normal: "4px",

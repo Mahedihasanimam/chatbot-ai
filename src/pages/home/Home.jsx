@@ -4,7 +4,8 @@ import MyButton from "../../components/util/mybutton";
 
 const Home = () => {
   return (
-    <div className="bg-[#000000] ">
+    <div className="bg-[#000000] bg-cover bg-no-repeat bg-center"
+>
       <div className="container mx-auto text-white  px-4 min-h-screen">
         <div>
           <div className="flex justify-center">
