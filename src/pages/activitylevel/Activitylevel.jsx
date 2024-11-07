@@ -153,17 +153,13 @@ const Activitylevel = () => {
         </div>
 
         {/* Form Container */}
-        <div className="w-full text-white h-fit bg-no-repeat bg-center bg-cover rounded-3xl border-2 border-[#262136] shadow-lg mt-8">
+        <div className="w-full text-white h-fit bg-no-repeat bg-center bg-cover rounded-3xl border-2 border-[#262136] shadow-lg mt-8 p-[1px] focus-within:bg-gradient-to-l focus-within:from-[#1A50FF] focus-within:to-[#D96FF8]">
           {inputsForCurrentStep[currentInputIndex].name === "gender" ? (
-
-
-            <div className="relative">
-
-
+            <div className="relative bg-[#1D192999]">
               <select
-                style={{ height: "56px" }}
+                style={{ height: "56px", backgroundColor: "#191425" }}
                 name="gender"
-                className="w-full px-4 py-3 bg-[#17141F] text-[#E8E8EA] rounded-3xl border-none focus:outline-none focus:ring-2 focus:ring-[#9F5CF1] placeholder-[#E8E8EA] font-medium custom-select"
+                className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium custom-select"
                 value={formData.gender}
                 onChange={handleInputChange}
               >
@@ -176,21 +172,22 @@ const Activitylevel = () => {
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                 <FaChevronDown className="w-5 h-5 text-[#E8E8EA]" />
               </div>
-
             </div>
-
           ) : (
             <input
-              style={{ height: "56px" }}
+              style={{ height: "56px", backgroundColor: "#191425" }}
               type="text"
               name={inputsForCurrentStep[currentInputIndex].name}
               placeholder={inputsForCurrentStep[currentInputIndex].placeholder}
-              className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium"
+              className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium "
               value={formData[inputsForCurrentStep[currentInputIndex].name]}
               onChange={handleInputChange}
             />
           )}
+       
         </div>
+
+
         {/* Buttons */}
         <div className="flex justify-center items-center mybuttons mt-[-27px] space-x-[24px]">
           <Button
@@ -211,7 +208,7 @@ const Activitylevel = () => {
           </Button>
           {currentInputIndex < inputsForCurrentStep.length - 1 ? (
             <Button
-              className="my-6 shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium"
+              className={`my-6  ${!isCurrentInputValid ? 'opacity-50' : ''} shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium bg-gradient-to-l`}
               style={{
                 marginRight: "10px",
                 height: "44px",
@@ -227,6 +224,7 @@ const Activitylevel = () => {
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10ZM11.3334 6.39046L14.9429 9.99994L11.3334 13.6094L10.3906 12.6666L12.3906 10.6667H5.33333V9.33333H12.3907L10.3906 7.33327L11.3334 6.39046Z" fill="white" />
               </svg>
+
 
             </Button>
           ) : (
@@ -251,6 +249,8 @@ const Activitylevel = () => {
             </Button>
           )}
         </div>
+
+
         {/* Progress dots */}
         <div className="flex justify-center items-center  space-x-2 bg-[#00000099] w-[64px] h-[30px] mx-auto rounded-lg">
           {inputsForCurrentStep.map((_, index) => (

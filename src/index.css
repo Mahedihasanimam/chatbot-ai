@@ -21,3 +21,7 @@ body{
     background-position: right 10px center; /* Position the icon */
   
 }
+
+.relative.bg-\[\#1D192999\] {
+    border-radius: 30px;
+}
