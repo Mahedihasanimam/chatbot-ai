@@ -20,7 +20,7 @@ const Home = () => {
             </span>{" "}
           </h1>
 
-          <p className="text-xl font-medium leading-6 text-center text-[#77757F]">
+          <p className="lg:text-xl md:text-lg text-[16px] font-medium leading-6 text-center text-[#77757F]">
             Help us get to know you better! Share a bit about yourself so your
             AI chatbot can be customized just for you, making every conversation
             more fun and personal.

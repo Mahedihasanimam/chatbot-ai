@@ -19,8 +19,8 @@ const Allset = () => {
           You’re all set!
         </span>
         <br />
-        <p className="text-[16px] font-semibold text-[#77757F] mt-[16px] typing-effect">
-          You’re approximately top 10% of the global population and 5% of the USA.
+        <p className="text-[16px] font-semibold text-[#77757F] mt-[16px] typing-effect text-wrap ">
+          You’re approximately top 10% of <br /> the global population and 5% of the USA.
         </p>
         <br />
 
