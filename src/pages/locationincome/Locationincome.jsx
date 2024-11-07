@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
-import './custommodal.css'
+import "tailwindcss/tailwind.css";
+import { FaChevronDown } from "react-icons/fa";
 
 const Locationincome = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(5);
+  const [currentInputIndex, setCurrentInputIndex] = useState(0);
 
-  // Step Titles
   const stepTitles = [
     "Personal information",
     "Physical details",
@@ -16,7 +18,6 @@ const Locationincome = () => {
     "Location & income",
   ];
 
-  // Array of routes corresponding to each step
   const stepRoutes = [
     "/personalinfo",
     "/physicaldetails",
@@ -25,10 +26,18 @@ const Locationincome = () => {
     "/locationincome",
   ];
 
+  // Define input fields for the current step
+  const inputsForCurrentStep = [
+    { name: "name", placeholder: "What’s your height?" },
+    { name: "age", placeholder: "What is your age?" },
+    { name: "gender", placeholder: "What is your gender?" },  // Gender input
+  ];
+
   // State for form inputs
   const [formData, setFormData] = useState({
-    live: "",
-    income: "",
+    name: "",
+    age: "",
+    gender: "",
   });
 
   const handleInputChange = (e) => {
@@ -36,180 +45,231 @@ const Locationincome = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleNextInput = () => {
+    if (formData[inputsForCurrentStep[currentInputIndex].name]?.trim() === "") return;
+
+    if (currentInputIndex < inputsForCurrentStep.length - 1) {
+      setCurrentInputIndex(currentInputIndex + 1);
+    } else {
+      // Reset inputs after completing the current step
+      setFormData({ name: "", age: "", gender: "" });
+      setCurrentInputIndex(0);
+      handleNextStep();
+    }
+  };
+
   const handleNextStep = () => {
-    console.log("Form Data:", formData); // Log all form data when the next button is clicked
+    console.log("Form Data:", formData);
     const nextStep = Math.min(currentStep, stepRoutes.length);
     navigate(stepRoutes[nextStep]);
     setCurrentStep(nextStep + 1);
   };
 
   const handlePrevStep = () => {
-    const prevStep = Math.max(currentStep - 2, 0);
-    navigate(stepRoutes[prevStep]);
-    setCurrentStep(prevStep + 1);
+    if (currentInputIndex > 0) {
+      setCurrentInputIndex(currentInputIndex - 1); // Go back to the previous input field
+    } else {
+      const prevStep = Math.max(currentStep - 2, 0);
+      navigate(stepRoutes[prevStep]);
+      setCurrentStep(prevStep + 1);
+    }
   };
-
-  // Check if all fields are filled
-  const isFormValid = Object.values(formData).every((value) => value.trim() !== "");
 
   // Use effect to handle the modal display timeout
   useEffect(() => {
     if (currentStep === 6) {
       const timer = setTimeout(() => {
         navigate("/mainpage"); // Replace with your desired route
-      }, 1000); // 1000 milliseconds = 1 second
+      }, 2000); // 1000 milliseconds = 1 second
 
       // Cleanup function to clear the timer if the component unmounts
       return () => clearTimeout(timer);
     }
   }, [currentStep, navigate]);
+  // Check if the current input is filled
+  const isCurrentInputValid = formData[inputsForCurrentStep[currentInputIndex].name]?.trim() !== "";
 
   return (
     <div className="flex justify-center items-center bg-chatbot-bg bg-no-repeat bg-center bg-cover min-h-screen text-white">
-      <div className="lg:max-w-5xl w-full mx-auto">
-        <div className="lg:flex flex-row mt-32 p-4 border-b-2 border-dotted border-[#34303E]">
+      <div className="lg:max-w-5xl mt-32 w-full mx-auto lg:p-4 md:p-4 p-2">
+        {/* Sidebar for steps */}
+        <div className="w-full bg-steps-bg rounded-2xl bg-no-repeat bg-center bg-cover">
+          <ul className="space-y-4 flex items-center justify-center bg-black w-full lg:h-[124px] h-[150px] rounded-2xl bg-opacity-35 border-2 border-[#34303E59] lg:pl-14 md:pl-12 pl-8 ">
+            {stepTitles.map((title, index) => {
+              const isCompleted = index < currentStep - 1;
+              const isActive = index === currentStep - 1;
 
-          {/* Sidebar for steps */}
-          <div className="w-full p-6">
-            <div className="pb-4 border-b-2 border-dotted border-[#34303E] max-w-md mb-6">
-              <h1 className="text-3xl font-extrabold text-[#E8E8EA] ">
-                Let’s make your chatbot truly yours!
-              </h1>
-              <p className="text-[16px] pt-4 font-semibold text-[#77757F]">
-                Complete these simple steps to help us create a personalized experience.
-              </p>
-            </div>
-            
-            <ul className="space-y-4">
-              {stepTitles.map((title, index) => {
-                const isCompleted = index < currentStep - 1;
-                const isActive = index === currentStep - 1;
-
-                return (
-                  <li key={index}>
+              return (
+                <li className="lg:pl-4" key={index}>
+                  <div
+                    className="flex items-center space-x-2 cursor-pointer  "
+                    onClick={() => index < currentStep && setCurrentStep(index + 1)}
+                  >
                     <div
-                      className="flex items-center space-x-2 cursor-pointer"
-                      onClick={() => index < currentStep && setCurrentStep(index + 1)}
-                    >
-                      <div
-                        className={`text-[16px] rounded-[12px] text-center w-10 h-10 flex items-center justify-center  
-                          ${isCompleted ? "bg-[#34303E] text-white" : "bg-[#1D1929] text-[#D2D1D4]"} 
+                      className={`text-[16px] rounded-[12px] text-center lg:w-10 md:w-10 w-8 lg:h-10 md:h-10 h-8 flex items-center justify-center  
+                        ${index === 0 && 'mt-4'} 
+                          ${isCompleted ? "bg-[#F7E2FE] text-[#C364DF]" : "bg-[#1D1929] text-[#D2D1D4]"} 
                           ${isActive ? "border border-purple-500" : ""}`}
-                      >
-                        {isCompleted ? (
-                          <svg
-                            width="16"
-                            height="11"
-                            viewBox="0 0 16 11"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="inline-block"
-                          >
-                            <path
-                              d="M1.06665 5.46668L5.86665 10.2667L14.9333 1.20001"
-                              stroke="white"
-                              strokeLinecap="square"
-                            />
-                          </svg>
-                        ) : (
-                          index + 1
-                        )}
-                      </div>
-                      <span
-                        className={`${
-                          isCompleted
-                          ? "bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent font-semibold"
-                          : "text-[#34303E] font-semibold"
-                        }
-                        ${
-                          isActive
-                          ? "text-[#D2D1D4] "
-                          : ""
-                        }
-                        `}
-                      >
-                        {title}
-                      </span>
+                    >
+                      {isCompleted ? (
+                        <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="0.799805" width="32" height="32" rx="12" fill="#C364DF" />
+                          <path d="M9.86621 15.4669L14.6662 20.2669L23.7329 11.2002" stroke="white" stroke-linecap="square" />
+                        </svg>
+                      ) : (
+                        index + 1
+                      )}
                     </div>
                     {index !== 4 && (
-                      <div className="h-6 w-[2px] bg-[#34303E] ml-4 mt-2"></div>
+                      <div className={`h-[2px] lg:w-[120px] md:w-[80px] w-[20px] lg:ml-4 mt-21
+                         ${isCompleted ? "bg-[#D96FF8]" : "bg-[#34303E]"}
+                         ${index === 0 && 'mt-4'} 
+                         `}></div>
                     )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                  </div>
 
-          {/* Form Container */}
-          <div className="lg:max-w-sm text-white w-full h-fit p-[24px] bg-gradient-to-l from-[#0F0D15] to-[#1D1929] rounded-3xl border-2 border-[#262136] shadow-lg">
-            <h3 className="text-[12px] font-bold text-[#77757F] uppercase tracking-normal mb-4">
-              {stepTitles[currentStep - 1]}
-            </h3>
-            <div className="space-y-[16px] ">
+                  <span
+                    className={`${isCompleted
+                      ? "bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent font-semibold"
+                      : "text-[#34303E] font-semibold"
+                      } ${isActive ? "text-[#D2D1D4]" : ""}`}
+                  >
+                    <div className={`lg:-translate-x-14 md:-translate-x-12 -translate-x-6   pt-2
+                      
+                      ${index === 4 && 'ml-6'} 
+                      `}>
+                      <p className="lg:text-sm md:text-sm text-xs lg:font-bold font-medium text-center text-[#D2D1D4]">
+                        Step {index + 1}
+                      </p>
+                      <p className="lg:text-xs md:text-xs text-[8px] text-center text-[#8E8C94] lg:block hidden">
+                        {title}
+                      </p>
+                      <p className="lg:text-xs md:text-xs text-[8px] text-center text-[#8E8C94] block lg:hidden">
+                        {title.split(' ')[0]}
+                      </p>
 
-              {/* Live Input */}
-              <div className="relative border-2 border-[#1D1929] rounded-lg">
-                <label className="absolute -top-1 left-3 text-sm text-[#77757F] font-normal py-1 px-1">
-                  Where do you live?
-                </label>
-                <input
-                  style={{ height: "56px" }}
-                  type="text"
-                  name="live"
-                  placeholder="Value"
-                  className="w-full px-4 py-3 bg-[#17141F] text-[#E8E8EA] rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-[#9F5CF1] placeholder-[#E8E8EA] font-medium"
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              {/* Income Dropdown */}
-              <div className="relative border-2 border-[#1D1929] rounded-lg">
-                <label className="absolute -top-1 left-3 text-sm text-[#77757F] font-normal py-1 px-1">
-                  How much is your income
-                </label>
-                <input
-                  style={{ height: "56px" }}
-                  type="text"
-                  name="income"
-                  placeholder="$1000"
-                  className="w-full px-4 py-3 bg-[#17141F] text-[#E8E8EA] rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-[#9F5CF1] placeholder-[#E8E8EA] font-medium"
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-          </div>
+                    </div>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
+        {/* Content */}
+        <div className="lg:pt-[224px] md:pt-[224px] pt-[150px] lg:pb-[96px] md:pb-[96px] pb-[">
+          <h1 className="text-[#A5A3A9] text-center font-normal lg:text-[56px] md:text-[56px] text-[36px] mb-4">
+            {inputsForCurrentStep[currentInputIndex].placeholder}
+          </h1>
+        </div>
+
+        {/* Form Container */}
+        <div className="w-full text-white h-fit bg-no-repeat bg-center bg-cover rounded-3xl border-2 border-[#262136] shadow-lg mt-8">
+          {inputsForCurrentStep[currentInputIndex].name === "gender" ? (
+
+
+            <div className="relative">
+
+
+              <select
+                style={{ height: "56px" }}
+                name="gender"
+                className="w-full px-4 py-3 bg-[#17141F] text-[#E8E8EA] rounded-3xl border-none focus:outline-none focus:ring-2 focus:ring-[#9F5CF1] placeholder-[#E8E8EA] font-medium custom-select"
+                value={formData.gender}
+                onChange={handleInputChange}
+              >
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                <FaChevronDown className="w-5 h-5 text-[#E8E8EA]" />
+              </div>
+
+            </div>
+
+          ) : (
+            <input
+              style={{ height: "56px" }}
+              type="text"
+              name={inputsForCurrentStep[currentInputIndex].name}
+              placeholder={inputsForCurrentStep[currentInputIndex].placeholder}
+              className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium"
+              value={formData[inputsForCurrentStep[currentInputIndex].name]}
+              onChange={handleInputChange}
+            />
+          )}
+        </div>
         {/* Buttons */}
-        <div className="flex justify-end items-center mt-6">
+        <div className="flex justify-center items-center mybuttons mt-[-27px] space-x-[24px]">
           <Button
             style={{
               marginRight: "10px",
-              marginTop: "27px",
-              height: "44px",
-              border: "1px solid #4A4754 ",
+              height: "46px",
+              marginTop: "26px",
+              border: "1px solid #4A4754",
               borderRadius: "10px",
               backgroundColor: "transparent",
             }}
             className="border-none text-gray-400 hover:text-white bg-transparent hover:bg-gray-700"
             onClick={handlePrevStep}
           >
-            <span className="bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent text-[16px] font-bold">Cancel</span>
+            <span className="bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent text-[16px] font-bold">
+              Previous
+            </span>
           </Button>
-          <Button
-            className="my-6 shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium"
-            style={{
-              marginRight: "10px",
-              height: "44px",
-              marginTop: "48px",
-              background: "linear-gradient(to left, #1A50FF, #D96FF8)",
-            }}
-            type="primary"
-            onClick={handleNextStep}
-            disabled={!isFormValid} // Disable the button if the form is invalid
-          >
-            Finish steps
-          </Button>
+          {currentInputIndex < inputsForCurrentStep.length - 1 ? (
+            <Button
+              className="my-6 shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium"
+              style={{
+                marginRight: "10px",
+                height: "44px",
+                marginTop: "48px",
+                background: "linear-gradient(to left, #1A50FF, #D96FF8)",
+              }}
+              type="primary"
+              onClick={handleNextInput}
+              disabled={!isCurrentInputValid}
+            >
+              Next
+
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10ZM11.3334 6.39046L14.9429 9.99994L11.3334 13.6094L10.3906 12.6666L12.3906 10.6667H5.33333V9.33333H12.3907L10.3906 7.33327L11.3334 6.39046Z" fill="white" />
+              </svg>
+
+            </Button>
+          ) : (
+            <Button
+              className="my-6 shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium"
+              style={{
+                marginRight: "10px",
+                height: "44px",
+                marginTop: "48px",
+                background: "linear-gradient(to left, #1A50FF, #D96FF8)",
+              }}
+              type="primary"
+              onClick={handleNextStep}
+              disabled={!isCurrentInputValid}
+            >
+              Next Step
+
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10ZM11.3334 6.39046L14.9429 9.99994L11.3334 13.6094L10.3906 12.6666L12.3906 10.6667H5.33333V9.33333H12.3907L10.3906 7.33327L11.3334 6.39046Z" fill="white" />
+              </svg>
+
+            </Button>
+          )}
+        </div>
+        {/* Progress dots */}
+        <div className="flex justify-center items-center  space-x-2 bg-[#00000099] w-[64px] h-[30px] mx-auto rounded-lg">
+          {inputsForCurrentStep.map((_, index) => (
+            <div
+              key={index}
+              className={`w-2 h-2 rounded-full ${index <= currentInputIndex ? "bg-[#FFFFFF]" : "bg-[#667085]"}`}
+            ></div>
+          ))}
         </div>
 
         <Modal
@@ -231,6 +291,7 @@ const Locationincome = () => {
         </p>
       </div>
         </Modal>
+
       </div>
     </div>
   );

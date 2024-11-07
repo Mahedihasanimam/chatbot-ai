@@ -27,7 +27,7 @@ const Personalinformation = () => {
 
   // Define input fields for the current step
   const inputsForCurrentStep = [
-    { name: "name", placeholder: "What’s your name?" },
+    { name: "name", placeholder: "What’s your height?" },
     { name: "age", placeholder: "What is your age?" },
     { name: "gender", placeholder: "What is your gender?" },  // Gender input
   ];
@@ -73,29 +73,29 @@ const Personalinformation = () => {
       setCurrentStep(prevStep + 1);
     }
   };
-  
+
 
   // Check if the current input is filled
   const isCurrentInputValid = formData[inputsForCurrentStep[currentInputIndex].name]?.trim() !== "";
 
   return (
     <div className="flex justify-center items-center bg-chatbot-bg bg-no-repeat bg-center bg-cover min-h-screen text-white">
-      <div className="lg:max-w-5xl mt-32 w-full mx-auto p-4">
+      <div className="lg:max-w-5xl mt-32 w-full mx-auto lg:p-4 md:p-4 p-2">
         {/* Sidebar for steps */}
         <div className="w-full bg-steps-bg rounded-2xl bg-no-repeat bg-center bg-cover">
-          <ul className="space-y-4 flex items-center justify-center bg-black w-full h-[124px] rounded-2xl bg-opacity-35 border-2 border-[#34303E59] pl-14">
+          <ul className="space-y-4 flex items-center justify-center bg-black w-full lg:h-[124px] h-[150px] rounded-2xl bg-opacity-35 border-2 border-[#34303E59] lg:pl-14 md:pl-12 pl-8 ">
             {stepTitles.map((title, index) => {
               const isCompleted = index < currentStep - 1;
               const isActive = index === currentStep - 1;
 
               return (
-                <li className="pl-4" key={index}>
+                <li className="lg:pl-4" key={index}>
                   <div
                     className="flex items-center space-x-2 cursor-pointer  "
                     onClick={() => index < currentStep && setCurrentStep(index + 1)}
                   >
                     <div
-                      className={`text-[16px] rounded-[12px] text-center w-10 h-10 flex items-center justify-center  
+                      className={`text-[16px] rounded-[12px] text-center lg:w-10 md:w-10 w-8 lg:h-10 md:h-10 h-8 flex items-center justify-center  
                         ${index === 0 && 'mt-4'} 
                           ${isCompleted ? "bg-[#F7E2FE] text-[#C364DF]" : "bg-[#1D1929] text-[#D2D1D4]"} 
                           ${isActive ? "border border-purple-500" : ""}`}
@@ -127,8 +127,16 @@ const Personalinformation = () => {
                       
                       ${index === 4 && 'ml-6'} 
                       `}>
-                      <p className="text-sm font-bold text-center text-[#D2D1D4]">step {index + 1}</p>
-                      <p className="text-xs text-center text-[#8E8C94]">{title}</p>
+                      <p className="lg:text-sm md:text-sm text-xs lg:font-bold font-medium text-center text-[#D2D1D4]">
+                        Step {index + 1}
+                      </p>
+                      <p className="lg:text-xs md:text-xs text-[8px] text-center text-[#8E8C94] lg:block hidden">
+                        {title}
+                      </p>
+                      <p className="lg:text-xs md:text-xs text-[8px] text-center text-[#8E8C94] block lg:hidden">
+                        {title.split(' ')[0]}
+                      </p>
+
                     </div>
                   </span>
                 </li>
@@ -138,8 +146,8 @@ const Personalinformation = () => {
         </div>
 
         {/* Content */}
-        <div className="pt-[224px] pb-[96px]">
-          <h1 className="text-[#A5A3A9] text-center font-normal text-[56px] mb-4">
+        <div className="lg:pt-[224px] md:pt-[224px] pt-[150px] lg:pb-[96px] md:pb-[96px] pb-[">
+          <h1 className="text-[#A5A3A9] text-center font-normal lg:text-[56px] md:text-[56px] text-[36px] mb-4">
             {inputsForCurrentStep[currentInputIndex].placeholder}
           </h1>
         </div>
@@ -183,13 +191,13 @@ const Personalinformation = () => {
             />
           )}
         </div>
-   {/* Buttons */}
-   <div className="flex justify-center items-center mybuttons mt-[-27px] space-x-[24px]">
+        {/* Buttons */}
+        <div className="flex justify-center items-center mybuttons mt-[-27px] space-x-[24px]">
           <Button
             style={{
               marginRight: "10px",
-                height: "46px",
-                marginTop: "26px",
+              height: "46px",
+              marginTop: "26px",
               border: "1px solid #4A4754",
               borderRadius: "10px",
               backgroundColor: "transparent",
@@ -198,7 +206,7 @@ const Personalinformation = () => {
             onClick={handlePrevStep}
           >
             <span className="bg-gradient-to-l from-[#1A50FF] to-[#D96FF8] bg-clip-text text-transparent text-[16px] font-bold">
-             Previous
+              Previous
             </span>
           </Button>
           {currentInputIndex < inputsForCurrentStep.length - 1 ? (
@@ -253,7 +261,7 @@ const Personalinformation = () => {
           ))}
         </div>
 
-     
+
       </div>
     </div>
   );
