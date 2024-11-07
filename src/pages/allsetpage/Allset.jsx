@@ -1,15 +1,35 @@
 import { Button } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./animation.css"
+import "./animation.css";
+import { PiShareFatThin } from "react-icons/pi";
+import { BsShare } from "react-icons/bs";
 
 const Allset = () => {
   const navigate = useNavigate();
-  
+
   const handlenextpage = () => {
     navigate('/');
   };
-  
+
+  const handleShare = () => {
+    const shareData = {
+      title: "You’re all set!",
+      text: "Check out this page where you're approximately in the top 10% of the global population and 5% of the USA.",
+      url: window.location.href, // The current page URL
+    };
+
+    if (navigator.share) {
+      // Use Web Share API if supported
+      navigator.share(shareData)
+        .then(() => console.log('Page shared successfully!'))
+        .catch((error) => console.error('Error sharing:', error));
+    } else {
+      // Fallback: Display share options for platforms that support share URLs
+      alert("Sharing is not supported on this browser. Copy the URL and share it manually.");
+    }
+  };
+
   return (
     <div className="flex items-center justify-center bg-chatbot-bg h-screen">
       <div className="text-center p-4">
@@ -19,11 +39,12 @@ const Allset = () => {
           You’re all set!
         </span>
         <br />
-        <p className="text-[16px] font-semibold text-[#77757F] mt-[16px] typing-effect text-wrap ">
+        <p className="text-[16px] font-semibold text-[#77757F] mt-[16px] typing-effect text-wrap">
           You’re approximately top 10% of <br /> the global population and 5% of the USA.
         </p>
         <br />
 
+        {/* Restart Button */}
         <Button
           onClick={handlenextpage}
           className="my-6 shadow-2xl shadow-[#d86ff898] stroke-none border-none text-[16px] font-medium"
@@ -35,7 +56,7 @@ const Allset = () => {
           }}
           type="primary"
         >
-           Restart
+          Restart
           <svg
             className="animate-spin"
             width="20"
@@ -49,6 +70,22 @@ const Allset = () => {
               stroke="white"
             />
           </svg>
+        </Button>
+
+        {/* Share Button */}
+        <Button
+          onClick={handleShare}
+          className="my-6 shadow-lg border-2 border-[#d86ff898] text-[16px] font-medium ml-6"
+          style={{
+            height: "55px",
+            marginTop: "20px",
+         background:'transparent'
+          }}
+          type="primary"
+        >
+          Share
+
+          <BsShare   className="text-xl" />
         </Button>
       </div>
     </div>
