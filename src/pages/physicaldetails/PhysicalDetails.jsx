@@ -27,14 +27,12 @@ const PhysicalDetails = () => {
 
   // Define input fields for the current step
   const inputsForCurrentStep = [
-    { name: "name", placeholder: "What’s your height?" },
     { name: "age", placeholder: "What is your age?" },
-    { name: "gender", placeholder: "What is your gender?" },  // Gender input
+    { name: "gender", placeholder: "What is your gender?" },  
   ];
 
   // State for form inputs
   const [formData, setFormData] = useState({
-    name: "",
     age: "",
     gender: "",
   });

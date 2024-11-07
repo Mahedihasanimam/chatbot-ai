@@ -27,16 +27,15 @@ const Activitylevel = () => {
 
   // Define input fields for the current step
   const inputsForCurrentStep = [
-    { name: "name", placeholder: "What’s your height?" },
-    { name: "age", placeholder: "What is your age?" },
-    { name: "gender", placeholder: "What is your gender?" },  // Gender input
+    { name: "activitylavel", placeholder: "What is your level of physical activity? " },  // Gender input
+    { name: "gymtime", placeholder: "How often do you go to the gym or exercise?" },
   ];
 
   // State for form inputs
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    gender: "",
+
+    gymtime: "",
+    activitylavel: "",
   });
 
   const handleInputChange = (e) => {
@@ -153,39 +152,60 @@ const Activitylevel = () => {
         </div>
 
         {/* Form Container */}
-        <div className="w-full text-white h-fit bg-no-repeat bg-center bg-cover rounded-3xl border-2 border-[#262136] shadow-lg mt-8 p-[1px] focus-within:bg-gradient-to-l focus-within:from-[#1A50FF] focus-within:to-[#D96FF8]">
-          {inputsForCurrentStep[currentInputIndex].name === "gender" ? (
-            <div className="relative bg-[#1D192999]">
-              <select
-                style={{ height: "56px", backgroundColor: "#191425" }}
-                name="gender"
-                className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium custom-select"
-                value={formData.gender}
-                onChange={handleInputChange}
-              >
-                <option value="">Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
+        {/* Form Container */}
+<div className="w-full text-white h-fit bg-no-repeat bg-center bg-cover rounded-3xl border-2 border-[#262136] shadow-lg mt-8 p-[1px] focus-within:bg-gradient-to-l focus-within:from-[#1A50FF] focus-within:to-[#D96FF8]">
+  {inputsForCurrentStep[currentInputIndex].name === "gymtime" ? (
+    <div className="relative bg-[#1D192999]">
+      <select
+        style={{ height: "56px", backgroundColor: "#191425" }}
+        name="gymtime"
+        className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium custom-select"
+        value={formData.gymtime}
+        onChange={handleInputChange}
+      >
+        <option value="">Select a time</option>
+        <option value="Daily/3-4times">Daily/3-4 times</option>
+        <option value="perweek/1-2times">per week/1-2 times</option>
+        <option value="perweek/Never">per week/Never</option>
+      </select>
 
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                <FaChevronDown className="w-5 h-5 text-[#E8E8EA]" />
-              </div>
-            </div>
-          ) : (
-            <input
-              style={{ height: "56px", backgroundColor: "#191425" }}
-              type="text"
-              name={inputsForCurrentStep[currentInputIndex].name}
-              placeholder={inputsForCurrentStep[currentInputIndex].placeholder}
-              className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium "
-              value={formData[inputsForCurrentStep[currentInputIndex].name]}
-              onChange={handleInputChange}
-            />
-          )}
-       
-        </div>
+      <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+        <FaChevronDown className="w-5 h-5 text-[#E8E8EA]" />
+      </div>
+    </div>
+  ) : inputsForCurrentStep[currentInputIndex].name === "activitylavel" ? (
+    <div className="relative bg-[#1D192999]">
+      <select
+        style={{ height: "56px", backgroundColor: "#191425" }}
+        name="activitylavel"
+        className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium custom-select"
+        value={formData.activitylavel}
+        onChange={handleInputChange}
+      >
+        <option value="">Select a level</option>
+        <option value="Sedentary">Sedentary</option>
+        <option value="Light">Light</option>
+        <option value="Moderate">Moderate</option>
+        <option value="Active">Active</option>
+      </select>
+
+      <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+        <FaChevronDown className="w-5 h-5 text-[#E8E8EA]" />
+      </div>
+    </div>
+  ) : (
+    <input
+      style={{ height: "56px", backgroundColor: "#191425" }}
+      type="text"
+      name={inputsForCurrentStep[currentInputIndex].name}
+      placeholder={inputsForCurrentStep[currentInputIndex].placeholder}
+      className="w-full px-4 py-3 bg-[#1D192999] text-[#A5A3A9] rounded-3xl border-none focus:outline-none placeholder-[#A5A3A9] font-medium"
+      value={formData[inputsForCurrentStep[currentInputIndex].name]}
+      onChange={handleInputChange}
+    />
+  )}
+</div>
+
 
 
         {/* Buttons */}

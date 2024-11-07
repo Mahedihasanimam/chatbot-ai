@@ -27,16 +27,16 @@ const Lifestyle = () => {
 
   // Define input fields for the current step
   const inputsForCurrentStep = [
-    { name: "name", placeholder: "What’s your height?" },
-    { name: "age", placeholder: "What is your age?" },
-    { name: "gender", placeholder: "What is your gender?" },  // Gender input
+    { name: "diet", placeholder: "What is your diet like? " },
+    { name: "country", placeholder: "Where do you live?" },
+
   ];
 
   // State for form inputs
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    gender: "",
+    diet: "",
+    country: "",
+
   });
 
   const handleInputChange = (e) => {

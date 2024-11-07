@@ -28,16 +28,16 @@ const Locationincome = () => {
 
   // Define input fields for the current step
   const inputsForCurrentStep = [
-    { name: "name", placeholder: "What’s your height?" },
-    { name: "age", placeholder: "What is your age?" },
-    { name: "gender", placeholder: "What is your gender?" },  // Gender input
+    { name: "income", placeholder: "What is your income?" },
+    { name: "occupation", placeholder: "What is your occupation or field of work? " },
+  
   ];
 
   // State for form inputs
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    gender: "",
+    income: "",
+    occupation: "",
+
   });
 
   const handleInputChange = (e) => {

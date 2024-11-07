@@ -27,16 +27,15 @@ const Personalinformation = () => {
 
   // Define input fields for the current step
   const inputsForCurrentStep = [
-    { name: "name", placeholder: "What’s your height?" },
-    { name: "age", placeholder: "What is your age?" },
-    { name: "gender", placeholder: "What is your gender?" },  // Gender input
+    { name: "height", placeholder: "What’s your height?" },
+    { name: "weight", placeholder: "What is your weight?" },
   ];
 
   // State for form inputs
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    gender: "",
+    height: "",
+    weight: "",
+
   });
 
   const handleInputChange = (e) => {
@@ -123,7 +122,7 @@ const Personalinformation = () => {
                       : "text-[#34303E] font-semibold"
                       } ${isActive ? "text-[#D2D1D4]" : ""}`}
                   >
-                    <div className={`lg:-translate-x-14 md:-translate-x-12 -translate-x-6   pt-2
+                    <div className={`lg:-translate-x-14 md:-translate-x-12 -translate-x-4   pt-2
                       
                       ${index === 4 && 'ml-6'} 
                       `}>
@@ -146,7 +145,7 @@ const Personalinformation = () => {
         </div>
 
         {/* Content */}
-        <div className="lg:pt-[224px] md:pt-[224px] pt-[150px] lg:pb-[96px] md:pb-[96px] pb-[">
+        <div className="lg:pt-[224px] md:pt-[224px] pt-[140px] lg:pb-[96px] md:pb-[96px]  ">
           <h1 className="text-[#A5A3A9] text-center font-normal lg:text-[56px] md:text-[56px] text-[36px] mb-4">
             {inputsForCurrentStep[currentInputIndex].placeholder}
           </h1>
