@@ -4,7 +4,7 @@ import { Button, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import { FaChevronDown } from "react-icons/fa";
-
+import './custommodal.css'
 const Locationincome = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(5);
